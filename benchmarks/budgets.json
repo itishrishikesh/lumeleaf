@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "baseline": "Modern 8-core laptop, NVMe filesystem",
+  "budgets": {
+    "coldLaunchInteractiveP95Ms": 700,
+    "smallFileReadableP95Ms": 100,
+    "javaSyntax10KLinesP95Ms": 120,
+    "inputToFrameP95Ms": 16,
+    "steadyViewportAllocationBytesP95": 4096,
+    "quickOpen100KPathsP95Ms": 500,
+    "literalSearch1MLOCP95Ms": 150,
+    "largeFile1GiBFirstViewportP95Ms": 1000,
+    "largeFileRSSIncreaseMiB": 96,
+    "coreIdleRSSHardMiB": 130,
+    "indexedWorkspaceRSSHardMiB": 240,
+    "packagedDownloadHardMiB": 50
+  }
+}

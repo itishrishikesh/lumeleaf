@@ -1,0 +1,19 @@
+{
+  "name": "light",
+  "background": "#FAFAFC",
+  "surface": "#F1F3F7",
+  "surfaceRaised": "#FFFFFF",
+  "text": "#242830",
+  "muted": "#667085",
+  "accent": "#2859A6",
+  "keyword": "#7C3FA1",
+  "type": "#8A5600",
+  "string": "#2F6F3E",
+  "comment": "#667085",
+  "number": "#A23B22",
+  "selection": "#D8E8FF",
+  "added": "#247A45",
+  "removed": "#B42335",
+  "warning": "#875900",
+  "error": "#B42318"
+}

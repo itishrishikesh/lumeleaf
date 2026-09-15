@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Lumeleaf">
+  <rect width="256" height="256" rx="56" fill="#f4ecd8"/>
+  <path d="M58 174c44-4 78-28 104-89 17 23 27 51 18 76-13 35-57 46-95 32" fill="#315c75"/>
+  <path d="M66 184c32-18 62-38 91-72" fill="none" stroke="#f4ecd8" stroke-width="12" stroke-linecap="round"/>
+  <path d="M69 65v119h91" fill="none" stroke="#3c3428" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

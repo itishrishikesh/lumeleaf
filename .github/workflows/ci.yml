@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-15, macos-15-intel]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.25.x'
+          cache: true
+      - name: Install Linux graphics libraries
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y gcc pkg-config libwayland-dev libx11-dev libxkbcommon-x11-dev libegl1-mesa-dev libgles2-mesa-dev libxcursor-dev libvulkan-dev
+      - name: Verify core
+        run: make verify
+      - name: Build native application
+        run: make build
+      - name: Render fixtures
+        run: make visual
+      - name: Benchmark smoke gate
+        run: make bench-check
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lumeleaf-${{ matrix.os }}
+          path: /tmp/lumeleaf

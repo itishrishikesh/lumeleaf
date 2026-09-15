@@ -1,0 +1,19 @@
+{
+  "name": "sepia",
+  "background": "#F4ECD8",
+  "surface": "#EAE0C6",
+  "surfaceRaised": "#FBF5E7",
+  "text": "#3C3428",
+  "muted": "#766A57",
+  "accent": "#315C75",
+  "keyword": "#704583",
+  "type": "#805B1E",
+  "string": "#356548",
+  "comment": "#746B5C",
+  "number": "#994B2D",
+  "selection": "#D8CCAD",
+  "added": "#3D704C",
+  "removed": "#9D3E3B",
+  "warning": "#825F13",
+  "error": "#A63D35"
+}

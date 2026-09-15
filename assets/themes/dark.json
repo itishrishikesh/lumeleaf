@@ -1,0 +1,19 @@
+{
+  "name": "dark",
+  "background": "#111318",
+  "surface": "#181B22",
+  "surfaceRaised": "#20242D",
+  "text": "#E6E9EF",
+  "muted": "#9DA7B5",
+  "accent": "#82AAFF",
+  "keyword": "#C792EA",
+  "type": "#FFCB6B",
+  "string": "#C3E88D",
+  "comment": "#7D8799",
+  "number": "#F78C6C",
+  "selection": "#314966",
+  "added": "#75C991",
+  "removed": "#FF7B86",
+  "warning": "#FFD166",
+  "error": "#FF6B6B"
+}

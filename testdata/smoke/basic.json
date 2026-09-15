@@ -1,0 +1,10 @@
+{
+  "steps": [
+    {"open": "testdata/java/Reader.java"},
+    {"theme": "sepia"},
+    {"open": "testdata/markdown/reader.md"},
+    {"view": "reading"},
+    {"search": "Lumeleaf"},
+    {"exit": true}
+  ]
+}

@@ -1,0 +1,13 @@
+/spec.md
+/plan.md
+/build/
+/dist/
+/coverage/
+/*.out
+/*.pprof
+/*.trace
+/*.log
+/*.tmp
+/.lumeleaf/
+.DS_Store
+
