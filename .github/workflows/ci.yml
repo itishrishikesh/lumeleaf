@@ -23,7 +23,7 @@ jobs:
           cache: true
       - name: Install Linux graphics libraries
         if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo apt-get install -y gcc pkg-config libwayland-dev libx11-dev libxkbcommon-x11-dev libegl1-mesa-dev libgles2-mesa-dev libxcursor-dev libvulkan-dev
+        run: sudo apt-get update && sudo apt-get install -y gcc pkg-config libwayland-dev libx11-dev libx11-xcb-dev libxkbcommon-x11-dev libegl1-mesa-dev libgles2-mesa-dev libxcursor-dev libvulkan-dev
       - name: Verify core
         run: make verify
       - name: Build native application
