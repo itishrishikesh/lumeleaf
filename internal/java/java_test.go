@@ -37,6 +37,7 @@ func TestUTF16PositionRoundTrip(t *testing.T) {
 }
 
 func TestProjectJDKAndTrustDetection(t *testing.T) {
+	t.Setenv("JAVA_HOME", "")
 	root := t.TempDir()
 	if err := os.WriteFile(filepath.Join(root, "pom.xml"), []byte("not executed"), 0o600); err != nil {
 		t.Fatal(err)
