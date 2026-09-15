@@ -1,16 +1,20 @@
 GO ?= go
 GOCACHE ?= /tmp/lumeleaf-gocache
+VERSION ?= 1.0.0-dev
+COMMIT ?= unknown
+BUILD_DATE ?= unknown
+LDFLAGS := -s -w -X github.com/itishrishikesh/lumeleaf/internal/buildinfo.Version=$(VERSION) -X github.com/itishrishikesh/lumeleaf/internal/buildinfo.Commit=$(COMMIT) -X github.com/itishrishikesh/lumeleaf/internal/buildinfo.Date=$(BUILD_DATE)
 export GOCACHE
 
-.PHONY: all build build-headless run verify test race visual smoke-headless smoke-linux bench-check bench-full fuzz-smoke security clean
+.PHONY: all build build-headless run verify test race visual smoke-headless smoke-linux bench-check bench-full fuzz-smoke security package-linux clean
 
 all: build-headless
 
 build:
-	$(GO) build -buildvcs=false -trimpath -tags desktop -o /tmp/lumeleaf ./cmd/lumeleaf
+	$(GO) build -buildvcs=false -trimpath -tags desktop -ldflags "$(LDFLAGS)" -o /tmp/lumeleaf ./cmd/lumeleaf
 
 build-headless:
-	$(GO) build -buildvcs=false -trimpath -o /tmp/lumeleaf ./cmd/lumeleaf
+	$(GO) build -buildvcs=false -trimpath -ldflags "$(LDFLAGS)" -o /tmp/lumeleaf ./cmd/lumeleaf
 
 run:
 	$(GO) run -buildvcs=false -tags desktop ./cmd/lumeleaf $(FILE)
@@ -55,13 +59,17 @@ fuzz-smoke:
 	$(GO) test ./internal/encoding -run '^$$' -fuzz FuzzDecode -fuzztime=2s
 	$(GO) test ./internal/largefile -run '^$$' -fuzz FuzzSparseIndex -fuzztime=2s
 	$(GO) test ./internal/gitreview -run '^$$' -fuzz FuzzGitPorcelainParser -fuzztime=2s
-	$(GO) test ./internal/java -run '^$$' -fuzz FuzzLSPFraming -fuzztime=2s
 
 security:
 	$(GO) vet ./...
 	$(GO) run golang.org/x/vuln/cmd/govulncheck@v1.1.4 ./...
 	$(GO) list -m -json all >/tmp/lumeleaf-modules.json
 	$(GO) version -m /tmp/lumeleaf-verify
+
+package-linux: build
+	VERSION=$(VERSION) ARCH=amd64 BINARY=/tmp/lumeleaf DIST=/tmp/lumeleaf-release ./scripts/package-linux.sh
+	/tmp/lumeleaf-release/lumeleaf-linux-amd64 --version
+	dpkg-deb --info /tmp/lumeleaf-release/lumeleaf_$(VERSION)_amd64.deb >/dev/null
 
 clean:
 	$(GO) clean

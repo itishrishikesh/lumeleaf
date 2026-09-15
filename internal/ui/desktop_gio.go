@@ -14,6 +14,7 @@ import (
 	giotext "gioui.org/text"
 	"gioui.org/unit"
 	"gioui.org/widget/material"
+	"github.com/itishrishikesh/lumeleaf/internal/buildinfo"
 	"github.com/itishrishikesh/lumeleaf/internal/theme"
 )
 
@@ -29,7 +30,7 @@ func window(path, themeName string) error {
 		return err
 	}
 	w := new(app.Window)
-	w.Option(app.Title("Lumeleaf"), app.Size(unit.Dp(1100), unit.Dp(760)))
+	w.Option(app.Title("Lumeleaf "+buildinfo.Version), app.Size(unit.Dp(1100), unit.Dp(760)))
 	th := material.NewTheme()
 	th.Shaper = giotext.NewShaper(giotext.WithCollection(gofont.Collection()))
 	var ops op.Ops

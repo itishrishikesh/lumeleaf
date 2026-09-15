@@ -4,13 +4,13 @@
 
 ![Lumeleaf in the sepia theme](assets/screenshot.png)
 
-Lumeleaf is an early, local-first reader for the part of software development that AI agents make more important: seeing exactly what changed, following structure, and deciding whether the result is right. It deliberately avoids an extension host, embedded browser, terminal, debugger, and built-in AI chat.
+Lumeleaf is a stable, local-first reader for the part of software development that AI agents make more important: seeing exactly what changed, following structure, and deciding whether the result is right. It deliberately avoids an extension host, embedded browser, terminal, debugger, and built-in AI chat.
 
 > **Development disclosure:** This project was generated with OpenAI Codex 5.6 Sol using high reasoning effort. It is primarily intended for the author's personal use. Review and test the code before relying on it.
 
-## Current status
+## Lumeleaf 1.0
 
-Lumeleaf is an **experimental 0.1 vertical slice**, not yet a replacement for a full IDE.
+Lumeleaf 1.0 is intentionally a focused code reader rather than a replacement for a write-heavy IDE. Its supported core is opening Java and Markdown quickly, retaining a calm layout, and supplying review-oriented workspace services without a runtime language server.
 
 Implemented today:
 
@@ -22,16 +22,35 @@ Implemented today:
 - Memory-mapped, sparse-indexed large-file reader.
 - Incremental workspace discovery, Quick Open ranking, streaming search through `rg` or a Go fallback, and disk reconciliation.
 - Read-only Git status/diff parsing and local review state foundations.
-- Lazy, trust-gated JDT LS protocol client foundations.
 - Reproducible visual fixtures, race-tested packages, fuzz targets, and benchmark gates.
 
-The native window currently provides the reading surface; several underlying services are not yet wired to every interactive control. See [Known limitations](#known-limitations).
+Java parsing, symbols, folds, and syntax roles are built into the executable. Lumeleaf does not require Java, a JDK, JDT LS, Node.js, Python, Electron, a browser engine, an account, or a network connection.
 
 ## Why view-first?
 
 Agent workflows produce changes faster than people can responsibly inspect them. Lumeleaf optimizes for opening first, reading without layout churn, moving through changed hunks, and noticing external edits. Language servers and repository analysis are optional background layers; they never block the first readable frame.
 
-## Build
+## Install
+
+Download the installers and binaries from the [Lumeleaf 1.0.0 release](https://github.com/itishrishikesh/lumeleaf/releases/tag/v1.0.0):
+
+- macOS Apple Silicon: `Lumeleaf-1.0.0-macos-arm64.dmg`
+- macOS Intel: `Lumeleaf-1.0.0-macos-amd64.dmg`
+- Debian/Ubuntu x86-64: `lumeleaf_1.0.0_amd64.deb`
+- Portable Linux x86-64: `lumeleaf-1.0.0-linux-amd64.tar.gz`
+- Raw executables for all three supported targets
+
+Every release includes `SHA256SUMS.txt`. The macOS app is ad-hoc signed; because it is not Apple-notarized, first launch may require approval in Privacy & Security.
+
+The portable Linux bundle installs for the current user without root:
+
+```bash
+tar -xzf lumeleaf-1.0.0-linux-amd64.tar.gz
+cd lumeleaf-1.0.0-linux-amd64
+./install.sh
+```
+
+## Build from source
 
 Requirements: Go 1.25+, Git, a C compiler, and Gio's platform libraries.
 
@@ -73,7 +92,7 @@ The command registry defines the intended stable shortcuts while UI wiring is co
 
 ## Privacy and trust
 
-Source stays on your machine. Lumeleaf has no telemetry, account, cloud dependency, or bundled AI service. Opening an untrusted workspace never launches a language server, build wrapper, Git hook, formatter, remote image, or external link. JDT LS is an optional local process and is measured separately from the core reader.
+Source stays on your machine. Lumeleaf has no telemetry, account, cloud dependency, bundled AI service, or external language-server process. Opening a workspace never launches a build wrapper, Git hook, formatter, remote image, or external link.
 
 ## Performance
 
@@ -88,16 +107,16 @@ make smoke-headless
 make bench-check
 ```
 
-`make smoke-linux` additionally exercises the Gio path under a headless Weston compositor. CI builds and tests Linux and macOS.
+`make smoke-linux` additionally exercises the Gio path under a headless Weston compositor. CI builds and tests Linux, Intel macOS, and Apple Silicon macOS. Tagged releases build installers entirely on GitHub-hosted runners and publish checksums with each asset.
 
 ## Known limitations
 
-- The editor surface is intentionally minimal and some workspace, Git review, and Markdown actions are currently exercised through package APIs/tests rather than complete GUI panels.
-- JDT LS must already be installed; Lumeleaf does not download a JRE or language server.
+- Lumeleaf 1.0 is a viewer: terminal, debugger, refactoring, extension hosting, and AI chat are deliberately outside its scope.
+- Some workspace and Git review services are exposed as stable internal components before receiving dedicated GUI panels.
 - Large-file mode is read-only.
-- macOS artifacts are unsigned and not notarized.
+- macOS applications are ad-hoc signed but not Apple-notarized.
 - Screen-reader semantics have a tested platform-neutral model, but native assistive-technology testing is incomplete.
-- AppImage packaging and session-snapshot compression are planned after the vertical slice stabilizes.
+- Linux distributions outside the Debian family should use the portable bundle or raw binary.
 
 ## Project policy
 

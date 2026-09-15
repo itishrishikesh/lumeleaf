@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.itishrishikesh.Lumeleaf</id>
+  <name>Lumeleaf</name>
+  <summary>A fast, native Java and Markdown reader</summary>
+  <metadata_license>MIT</metadata_license>
+  <project_license>MIT</project_license>
+  <description>
+    <p>Lumeleaf is a local-first workspace for reading agent-written Java, Markdown, and Git changes without an embedded browser or cloud service.</p>
+  </description>
+  <launchable type="desktop-id">io.github.itishrishikesh.Lumeleaf.desktop</launchable>
+  <url type="homepage">https://github.com/itishrishikesh/lumeleaf</url>
+  <provides>
+    <binary>lumeleaf</binary>
+  </provides>
+  <releases>
+    <release version="1.0.0" date="2026-09-16"/>
+  </releases>
+</component>

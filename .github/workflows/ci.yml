@@ -28,6 +28,11 @@ jobs:
         run: make verify
       - name: Build native application
         run: make build
+      - name: Verify build identity
+        run: /tmp/lumeleaf --version
+      - name: Validate Linux installer
+        if: runner.os == 'Linux'
+        run: make package-linux VERSION=1.0.0
       - name: Render fixtures
         run: make visual
       - name: Benchmark smoke gate

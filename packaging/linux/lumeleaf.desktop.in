@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Lumeleaf
+GenericName=Code Reader
+Comment=Fast, native Java and Markdown reader
+Exec=@EXEC@ %F
+Icon=io.github.itishrishikesh.Lumeleaf
+Terminal=false
+Categories=Development;TextEditor;
+MimeType=text/x-java;text/markdown;text/plain;
+StartupNotify=true

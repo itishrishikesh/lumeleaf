@@ -10,6 +10,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/itishrishikesh/lumeleaf/internal/buildinfo"
 	"github.com/itishrishikesh/lumeleaf/internal/markdown"
 	"github.com/itishrishikesh/lumeleaf/internal/ui"
 	"github.com/itishrishikesh/lumeleaf/internal/workspace"
@@ -37,8 +38,13 @@ func Run(args []string) error {
 	scale := fs.Float64("scale", 1, "UI scale")
 	smoke := fs.String("smoke-script", "", "scripted smoke scenario")
 	report := fs.String("report", "", "smoke report path")
+	showVersion := fs.Bool("version", false, "print version and build information")
 	if err := fs.Parse(args); err != nil {
 		return err
+	}
+	if *showVersion {
+		fmt.Println(buildinfo.String())
+		return nil
 	}
 	if *renderFixture != "" {
 		if *output == "" {

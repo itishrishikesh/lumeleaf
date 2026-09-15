@@ -80,12 +80,17 @@ func (j *Java) Parse(ctx context.Context, source []byte, revision uint64, visibl
 	if err := ctx.Err(); err != nil {
 		return Result{}, err
 	}
-	tree := j.parser.ParseWithOptions(func(offset int, _ sitter.Point) []byte {
-		if offset >= len(source) {
-			return nil
-		}
-		return source[offset:]
-	}, nil, &sitter.ParseOptions{ProgressCallback: func(s sitter.ParseState) bool { return ctx.Err() != nil }})
+	var tree *sitter.Tree
+	if ctx.Done() == nil {
+		tree = j.parser.Parse(source, nil)
+	} else {
+		tree = j.parser.ParseWithOptions(func(offset int, _ sitter.Point) []byte {
+			if offset >= len(source) {
+				return nil
+			}
+			return source[offset:]
+		}, nil, &sitter.ParseOptions{ProgressCallback: func(s sitter.ParseState) bool { return ctx.Err() != nil }})
+	}
 	if tree == nil {
 		return Result{}, ctx.Err()
 	}
@@ -126,11 +131,21 @@ func walk(n *sitter.Node, src []byte, depth, start, end int, out *Result) {
 		out.Folds = append(out.Folds, Fold{int(sp.Row), int(ep.Row)})
 	}
 	cursor := n.Walk()
-	children := n.NamedChildren(cursor)
-	cursor.Close()
-	for i := range children {
-		child := children[i]
-		walk(&child, src, depth+1, start, end, out)
+	defer cursor.Close()
+	if !cursor.GotoFirstChild() {
+		return
+	}
+	for {
+		child := cursor.Node()
+		if child.IsNamed() {
+			if int(child.StartByte()) >= end {
+				return
+			}
+			walk(child, src, depth+1, start, end, out)
+		}
+		if !cursor.GotoNextSibling() {
+			return
+		}
 	}
 }
 
