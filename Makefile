@@ -1,6 +1,6 @@
 GO ?= go
 GOCACHE ?= /tmp/lumeleaf-gocache
-VERSION ?= 1.0.0-dev
+VERSION ?= 1.0.1-dev
 COMMIT ?= unknown
 BUILD_DATE ?= unknown
 LDFLAGS := -s -w -X github.com/itishrishikesh/lumeleaf/internal/buildinfo.Version=$(VERSION) -X github.com/itishrishikesh/lumeleaf/internal/buildinfo.Commit=$(COMMIT) -X github.com/itishrishikesh/lumeleaf/internal/buildinfo.Date=$(BUILD_DATE)

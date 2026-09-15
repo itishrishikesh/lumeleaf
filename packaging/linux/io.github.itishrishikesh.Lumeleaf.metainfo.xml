@@ -14,6 +14,9 @@
     <binary>lumeleaf</binary>
   </provides>
   <releases>
+	<release version="1.0.1" date="2026-09-16">
+	  <description><p>Adds working in-app Open File and Open Project controls.</p></description>
+	</release>
     <release version="1.0.0" date="2026-09-16"/>
   </releases>
 </component>

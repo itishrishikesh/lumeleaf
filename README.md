@@ -32,12 +32,12 @@ Agent workflows produce changes faster than people can responsibly inspect them.
 
 ## Install
 
-Download the installers and binaries from the [Lumeleaf 1.0.0 release](https://github.com/itishrishikesh/lumeleaf/releases/tag/v1.0.0):
+Download the installers and binaries from the [latest Lumeleaf release](https://github.com/itishrishikesh/lumeleaf/releases/latest):
 
-- macOS Apple Silicon: `Lumeleaf-1.0.0-macos-arm64.dmg`
-- macOS Intel: `Lumeleaf-1.0.0-macos-amd64.dmg`
-- Debian/Ubuntu x86-64: `lumeleaf_1.0.0_amd64.deb`
-- Portable Linux x86-64: `lumeleaf-1.0.0-linux-amd64.tar.gz`
+- macOS Apple Silicon: `Lumeleaf-1.0.1-macos-arm64.dmg`
+- macOS Intel: `Lumeleaf-1.0.1-macos-amd64.dmg`
+- Debian/Ubuntu x86-64: `lumeleaf_1.0.1_amd64.deb`
+- Portable Linux x86-64: `lumeleaf-1.0.1-linux-amd64.tar.gz`
 - Raw executables for all three supported targets
 
 Every release includes `SHA256SUMS.txt`. The macOS app is ad-hoc signed; because it is not Apple-notarized, first launch may require approval in Privacy & Security.
@@ -45,9 +45,20 @@ Every release includes `SHA256SUMS.txt`. The macOS app is ad-hoc signed; because
 The portable Linux bundle installs for the current user without root:
 
 ```bash
-tar -xzf lumeleaf-1.0.0-linux-amd64.tar.gz
-cd lumeleaf-1.0.0-linux-amd64
+tar -xzf lumeleaf-1.0.1-linux-amd64.tar.gz
+cd lumeleaf-1.0.1-linux-amd64
 ./install.sh
+```
+
+## Open a file or project
+
+Launch Lumeleaf, enter a file or directory in the path field, then select **Open File** or **Open Project**. Pressing Enter automatically detects whether the path is a file or directory. Once a project is open, select any indexed text file from the project sidebar. `Ctrl/⌘ O` focuses the path field.
+
+You can also open a path directly:
+
+```bash
+lumeleaf ./src/Main.java
+lumeleaf ./my-project
 ```
 
 ## Build from source
